@@ -1,0 +1,20 @@
+Gera uma observação curta e profissional para o boletim escolar angolano (ensino médio).
+
+Contexto:
+- Aluno: {{aluno}}
+- Período: {{trimestre}}
+- Situação: {{situacao}}
+- Média: {{media}}
+- Disciplinas negativas: {{negativas}} ({{disciplinas_negativas}})
+
+Regras:
+- Português de Angola, tom formal e pedagógico.
+- Máximo 2 frases (até 400 caracteres).
+- Não inventar notas nem disciplinas.
+- Não usar emojis.
+- Se aprovado, reconheça o desempenho; se com negativas, incentive melhoria; se reprovado, seja claro e construtivo.
+
+Responde em JSON:
+{
+  "observacao": "texto da observação"
+}

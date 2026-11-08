@@ -1,0 +1,85 @@
+CONHECIMENTO DO SISTEMA FACILITA
+
+MÓDULOS PRINCIPAIS
+- Dashboard: visão geral conforme o perfil (admin, professor, aluno, coordenador, director de turma, secretaria, encarregado).
+- Notas: lançamento MAC, PP, PT (T1/T2), PG no 3.º trim. politécnico; médias trimestrais (MT) calculadas automaticamente.
+- Pautas: aproveitamento trimestral e final; exportação Excel/PDF; mini-pautas por disciplina.
+- Boletins: boletim individual e por turma; PDF; o encarregado pode assinar o boletim digitalmente no portal.
+- Recuperação (10.ª/11.ª): exame contínuo trimestral; nota REC substitui a MT (Art.º 30.º DE 424/25).
+- Recurso (12.ª): exame final; nota substitui a CFD (Art.º 31.º); máx. 3 disciplinas elegíveis (CFD 6–9).
+- Melhoria de classificação e Exame extraordinário: fluxos separados para alunos elegíveis (DE 424/25).
+- Assistente Facilita (chat): responde com dados reais da base de dados injectados em cada pergunta (notas, horário, provas, turmas) conforme o escopo do utilizador — nunca invente dados que não estejam no JSON de contexto.
+- Bloqueio de consulta no portal: admin pode bloquear aluno individualmente (ex.: não pagou boletim presencial) ou desactivar globalmente nas configurações.
+- Assistente Pedagógico: planificações, provas, correcção automática (professores); geração de materiais e calendários de provas com IA.
+- Estatísticas / Mapas: aprovação por turma, curso, disciplina (perfis de gestão/admin).
+- Configurações: ano lectivo, trimestre actual, nota mínima, instituição, backups.
+- Conselhos de notas: iniciar, ajustar classificações, concluir — bloqueia relançamentos após conclusão.
+- Transição de alunos: duplica registos no ano novo; aprovados → classe seguinte; reprovados → mesma classe; preserva encarregados e dados do aluno.
+- Transferência de ano lectivo: copia turmas 1:1 (estrutura) + associações; NÃO substitui a transição de promoção.
+- Assiduidade: registo de presenças por aula (chamada), justificação de faltas; alimenta as colunas J/I das pautas; encarregado é notificado de faltas.
+- Ocorrências disciplinares: registo, acompanhamento e resolução; encarregado pode ser notificado.
+- Mensagens escola–família: chat entre staff (director de turma, professores, secretaria) e encarregados, no menu Mensagens; encarregado responde pelo portal.
+- Mensagens internas: chat directo entre colaboradores (staff↔staff) no mesmo menu Mensagens.
+- Portal do Encarregado: acompanhamento dos educandos (notas, assiduidade, boletim, agenda), notificações, resumo semanal, mensagens e pedidos de documentos.
+- Resumo semanal WhatsApp: encarregados recebem semanalmente notas lançadas, faltas e avisos por WhatsApp (quando configurado).
+- Pedidos de documentos: encarregado pede pelo portal (declaração de frequência, declaração de matrícula, comprovativo de inscrição, ficha do aluno, cartão de estudante); a secretaria processa (pendente → em preparação → pronto para levantar → entregue). NÃO inclui declarações com notas nem certificados — esses vêm da escola mãe.
+- Secretaria: matrículas (individuais e importação), emissão de documentos PDF, pedidos do portal, campanhas.
+- Briefing do Director de Turma: painel no dashboard com alunos que precisam de atenção (faltas, ocorrências, notas em queda, mensagens sem resposta) e famílias a contactar.
+- Agenda escolar e Materiais académicos: eventos e materiais partilhados com turmas; alunos acedem pelo portal.
+
+TIPOS DE NOTA (Angola / DE 424/25)
+- MAC: média das avaliações contínuas.
+- PP: prova parcial.
+- PT: prova trimestral (T1 e T2; no T3 politécnico substituída por PG).
+- PG: Prova Global (3.º trim. politécnico) — CA = 0,6×CF + 0,4×PG.
+- MT: média trimestral (T1/T2: MAC+PP+PT / 3; T3 politécnico: MAC+PP / 2).
+- CF: classificação final do ano (politécnico: (MFT2+MT3)/2; administração: média das 3 MT).
+- CA: classificação anual; CFD: classificação final da disciplina (terminais / 12.ª).
+- REC: recuperação trimestral (10.ª/11.ª).
+
+REGRAS DE APROVAÇÃO NA PAUTA
+- Trimestre: APTO se no máximo 2 disciplinas com MT (ou CA no T3) abaixo da nota mínima; senão NÃO APTO.
+- Final: APROVADO / REPROVADO com a mesma regra (máx. 2 negativas).
+
+PERFIS E ACESSO A DADOS
+- Aluno: apenas os SEUS dados (notas, turma, professores, coordenador, director de turma) + informação pública da escola.
+- Encarregado: apenas os educandos associados (notas quando permitido, assiduidade, boletins, documentos, mensagens com a escola).
+- Professor: turmas/disciplinas que lecciona; alunos dessas turmas; pendências de lançamento; rankings e comparações no seu escopo.
+- Director de turma / Coordenador: turmas/cursos sob responsabilidade; rankings, contagens, notas baixas, melhorias; briefing de famílias a contactar.
+- Secretaria: matrículas, documentos e pedidos do portal; dados de alunos para fins administrativos; sem notas.
+- Inspecção (inspetor): auditoria de pautas certificadas e conformidade de registos; consulta.
+- Subdirector Pedagógico: visão institucional (consulta); sem gestão de utilizadores.
+- Gestor Académico: controlo total académico em TODOS os cursos/turmas (notas, mini-pautas, pautas, boletins, conselhos); sem gestão de utilizadores.
+- Directora Geral / Administração: visão institucional completa (inclui utilizadores e configurações técnicas).
+
+DADOS DO ASSISTENTE (chaves JSON no contexto)
+- rankings: pacote unificado — melhor_desempenho_geral, melhores_por_turma, melhores_por_curso, panorama_trimestres (T1/T2/T3), destaques_disciplinas.
+- instituicao / lideranca: nome da escola, directora, subdirector, coordenadores.
+- aluno_sessao / alunos: desempenho, analise_desempenho (comparação trimestres, recomendações), notas_por_disciplina.
+- melhores_alunos: ranking por turma (T1→MT, T2→MFT2, T3→CA).
+- melhor_desempenho_geral: melhor aluno agregado entre todas as turmas (classe, curso ou escola no âmbito); top_geral traz a lista ordenada (ex.: 10 melhores).
+- comparacao_turma: posição relativa dos alunos numa turma.
+- contagens: total de alunos por turma, curso, classe e escola (no âmbito do utilizador).
+- notas_baixas: MT abaixo do mínimo; exame_melhoria: elegibilidade Art.º 34.º.
+- professores_por_turma / directores_turma / coordenadores_curso: equipa pedagógica.
+- Nota: o Facilita regista assiduidade por aula (chamada) e faltas justificadas/injustificadas, que alimentam as colunas J/I das pautas. «Baixas» no contexto de notas referem-se a valores abaixo do mínimo.
+
+FECHO DE ANO LECTIVO (ordem recomendada)
+1. Criar ano lectivo NOVO e turmas de destino (incluindo classes seguintes para promoção).
+2. Transferir estrutura (opcional): copia turmas 1:1, associações, directores e coordenadores.
+3. Transição de alunos: aprovados para classe+1; reprovados para mesma classe; actualiza portal.
+4. Activar o novo ano lectivo nas configurações.
+
+MENUS ÚTEIS (orientação)
+- Lançar notas: Notas → Lançamento em lote / Lançar PG.
+- Ver pauta: Pautas → seleccionar turma e trimestre.
+- Recuperação: Pautas → Exame de Recuperação (10.ª/11.ª).
+- Recurso: Pautas → Exame de Recurso (12.ª).
+- Portal aluno: Portal → Dashboard / As Minhas Notas / Boletim PDF.
+- Portal encarregado: Início / Esta semana / Mensagens / Docs (pedidos de documentos) / Notificações.
+- Mensagens (staff): menu Mensagens → Nova conversa → separador Encarregado ou Colaborador.
+- Presenças: Assiduidade → Presenças → escolher aula; justificar faltas no registo.
+- Ocorrências: Assiduidade → Ocorrências → Registar / Resolver.
+- Pedidos de documentos (secretaria): Secretaria → Pedidos do portal.
+- Transição alunos: Administração → Transição de Alunos.
+- Transferir ano: Administração → Transferência de Ano Lectivo.

@@ -1,0 +1,38 @@
+LINGUAGEM: português de Angola/Portugal; ortografia académica luso-angolana (acção, actividade, objectivo); nunca português do Brasil.
+
+Gera {{quantidade}} questão(ões) para o banco de questões reutilizável:
+- Disciplina: {{disciplina}}
+- Classe (contexto): {{classe}}
+- Tipo pedido: {{tipo}}
+- Dificuldade: {{dificuldade}}
+- Tema / tópicos: {{tema}}
+- Cotação sugerida por questão: {{cotacao}}
+
+Tipos válidos (usa exactamente estes valores em "tipo"):
+- escolha_multipla — 4 opções A–D e resposta = letra correcta (A, B, C ou D)
+- verdadeiro_falso — resposta = "Verdadeiro" ou "Falso"
+- resposta_curta — resposta = texto curto modelo
+- desenvolvimento — resposta = critérios / resposta modelo
+
+Responde APENAS em JSON válido com este formato:
+{
+  "questoes": [
+    {
+      "tipo": "escolha_multipla",
+      "enunciado": "texto da pergunta",
+      "opcoes": { "A": "...", "B": "...", "C": "...", "D": "..." },
+      "resposta": "A",
+      "cotacao": 1,
+      "dificuldade": "media",
+      "tags": "palavra1, palavra2"
+    }
+  ]
+}
+
+Regras:
+- Gera exactamente {{quantidade}} itens no array "questoes".
+- Enunciados claros, adequados à classe e disciplina.
+- Para escolha_multipla: opcoes A–D obrigatórias e resposta uma letra.
+- Para verdadeiro_falso: não envies "opcoes"; resposta "Verdadeiro" ou "Falso".
+- dificuldade deve ser facil, media ou dificil.
+- Sem markdown, sem texto fora do JSON.

@@ -1,0 +1,102 @@
+/**
+ * Portal do Aluno — estilos dedicados (complementa custom.css)
+ */
+
+.portal-aluno-page .portal-schedule-mobile .list-group-item {
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+}
+
+.portal-notificacao-count {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    border-radius: 999px;
+    background: #ef4444;
+    color: #fff;
+    font-size: 0.6rem;
+    font-weight: 700;
+    line-height: 16px;
+    text-align: center;
+}
+
+.portal-notificacao-badge {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ef4444;
+}
+
+.portal-notificacao-item {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--border-subtle, rgba(0, 0, 0, 0.06));
+    color: inherit;
+    transition: background 0.15s ease;
+}
+
+.portal-notificacao-item:hover {
+    background: color-mix(in srgb, var(--primary-color, #4f46e5) 6%, transparent);
+}
+
+.portal-notificacao-item--nova {
+    background: color-mix(in srgb, var(--primary-color, #4f46e5) 4%, var(--bg-card, #fff));
+}
+
+.portal-notificacao-item--lida .portal-notificacao-item__text {
+    color: var(--text-muted, #64748b);
+}
+
+.portal-notificacao-item__icon {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: color-mix(in srgb, currentColor 12%, transparent);
+    font-size: 1rem;
+}
+
+.portal-notificacoes-offcanvas {
+    max-width: min(100vw, 360px);
+}
+
+[data-theme="dark"] .portal-notificacao-item--nova {
+    background: color-mix(in srgb, var(--primary-color, #818cf8) 8%, var(--bg-card, #1e293b));
+}
+
+.portal-pwa-install {
+    position: sticky;
+    top: var(--portal-nav-h, 56px);
+    z-index: 99;
+    padding: 0 .75rem;
+    margin-bottom: .5rem;
+}
+
+.portal-pwa-install__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
+    flex-wrap: wrap;
+    padding: .65rem .85rem;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.12), rgba(99, 102, 241, 0.06));
+    border: 1px solid rgba(79, 70, 229, 0.22);
+    font-size: .82rem;
+}
+
+[data-theme="dark"] .portal-pwa-install__inner {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.18), rgba(15, 23, 42, 0.6));
+    border-color: rgba(129, 140, 248, 0.25);
+    color: #e2e8f0;
+}
+
+[data-theme="dark"] .portal-aluno-page .portal-schedule-mobile .list-group-item {
+    background: var(--bg-card);
+    border-color: var(--border-subtle);
+    color: var(--text-dark);
+}

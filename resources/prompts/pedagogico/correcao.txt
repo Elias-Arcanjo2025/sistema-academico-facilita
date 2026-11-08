@@ -1,0 +1,20 @@
+LINGUAGEM: português de Angola/Portugal; ortografia académica luso-angolana; nunca português do Brasil.
+
+Extrai e avalia as respostas do ALUNO a partir do texto OCR de uma folha de prova já preenchida.
+
+Texto OCR (pode conter ruído; ignore cabeçalhos de aula/plano se não forem respostas do aluno):
+{{ocr_texto}}
+
+Questões da prova (enunciados):
+{{questoes_json}}
+
+Chave de correção (respostas esperadas por número de questão):
+{{chave_json}}
+
+Tarefas:
+1. Para cada questão (1, 2, 3…), localize no OCR a resposta escrita/marcada pelo aluno.
+2. Preencha resposta_extraida com o que o aluno respondeu (letra A-D se objectiva, texto se dissertativa). Se não encontrar, use "".
+3. Compare com a chave e atribua sugestao_pontos (0 até à cotação da questão). Objectiva: cotação total se correcta, 0 se errada. Dissertativa: pontuação parcial se parcialmente correcta.
+4. questao_ref deve ser o número da questão como string ("1", "2", …).
+
+Responde em JSON com: itens (array: questao_ref, resposta_extraida, confianca EXACTAMENTE "alta", "media" ou "baixa", sugestao_pontos), sugestao_nota_total.

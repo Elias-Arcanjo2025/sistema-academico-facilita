@@ -1,0 +1,22 @@
+LINGUAGEM: português de Angola/Portugal; ortografia académica luso-angolana (acção, actividade, objectivo); nunca português do Brasil.
+
+Gera uma prova do tipo {{tipo_prova}} para:
+- Disciplina: {{disciplina}}
+- Classe: {{classe}}
+- Tempo: {{tempo_minutos}} minutos
+- Cotação total: {{cotacao_total}}
+- Conteúdos já ministrados (usar APENAS estes): {{conteudos_ministrados}}
+
+Responde em JSON com: titulo (ex: PROVA FINAL DO 2º TRIMESTRE DE SIGLA), instrucoes (regras breves opcionais), instrucoes_resolucao (frase padrão para o aluno), questoes (array com: numero, titulo_grupo, texto ou introducao, subitens [{letra, texto, cotacao}], cotacao total do grupo; ou tipo objectiva com opcoes e resposta_correcta), cotacao_total.
+
+Estrutura preferida (como provas angolanas oficiais):
+- Agrupar por temas com titulo_grupo (ex: "Conceitos de Redes") e cotacao total (ex: 4.0)
+- Texto introdutório curto em "texto" ou "introducao"
+- subitens a), b), c) com cotacao parcial (ex: 2.0 cada)
+- Usar vírgula decimal nas cotações quando relevante
+
+Para objectivas: tipo objectiva, texto, opcoes (4), resposta_correcta (A-D), resposta_sugerida, cotacao.
+Para dissertativas com subitens: resposta_sugerida por subitem ou global.
+
+IMPORTANTE: resposta_correcta e resposta_sugerida obrigatórias para correção automática.
+Máximo 5 grupos de questões; textos concisos para caber numa única página A4 impressa.

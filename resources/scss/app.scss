@@ -1,0 +1,168 @@
+// Variáveis personalizadas do Bootstrap (devem vir antes do import)
+$primary: #0d6efd;
+$secondary: #6c757d;
+$success: #198754;
+$info: #0dcaf0;
+$warning: #ffc107;
+$danger: #dc3545;
+$light: #f8f9fa;
+$dark: #212529;
+
+// Cores específicas do Sistema Académico
+$facilita-primary: #2c3e50;
+$facilita-secondary: #3498db;
+$facilita-accent: #27ae60;
+
+// Importar Bootstrap
+@import "bootstrap/scss/bootstrap";
+
+// Estilos personalizados do Sistema Académico Facilita
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f6fa;
+}
+
+// Navbar personalizada
+.navbar-facilita {
+    background-color: $facilita-primary;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+// Sidebar
+.sidebar {
+    min-height: calc(100vh - 56px);
+    background-color: $light;
+    border-right: 1px solid #dee2e6;
+
+    .nav-link {
+        color: $dark;
+        padding: 0.75rem 1rem;
+        border-radius: 0.25rem;
+        margin: 0.25rem 0.5rem;
+
+        &:hover {
+            background-color: darken($light, 5%);
+        }
+
+        &.active {
+            background-color: $facilita-secondary;
+            color: white;
+        }
+
+        i {
+            margin-right: 0.5rem;
+            width: 20px;
+            text-align: center;
+        }
+    }
+}
+
+// Cards
+.card {
+    border: none;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+
+    .card-header {
+        background-color: white;
+        border-bottom: 1px solid #eee;
+        font-weight: 600;
+    }
+}
+
+// Tabelas de notas
+.table-notas {
+    th, td {
+        vertical-align: middle;
+        text-align: center;
+    }
+
+    .nota-input {
+        width: 70px;
+        text-align: center;
+    }
+
+    .nota-positiva {
+        color: $success;
+        font-weight: bold;
+    }
+
+    .nota-negativa {
+        color: $danger;
+        font-weight: bold;
+    }
+}
+
+// Badges de estado
+.badge-pendente {
+    background-color: $warning;
+    color: $dark;
+}
+
+.badge-activo {
+    background-color: $success;
+}
+
+.badge-rejeitado {
+    background-color: $danger;
+}
+
+.badge-inactivo {
+    background-color: $secondary;
+}
+
+// Formulários
+.form-label-required::after {
+    content: " *";
+    color: $danger;
+}
+
+// Alertas personalizados
+.alert-facilita {
+    border-left: 4px solid $facilita-secondary;
+}
+
+// Botões de acção
+.btn-actions {
+    .btn {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+    }
+}
+
+// Dashboard cards
+.dashboard-card {
+    transition: transform 0.2s ease-in-out;
+
+    &:hover {
+        transform: translateY(-2px);
+    }
+
+    .card-icon {
+        font-size: 2.5rem;
+        opacity: 0.8;
+    }
+
+    .card-value {
+        font-size: 2rem;
+        font-weight: 700;
+    }
+}
+
+// Responsividade
+@media (max-width: 768px) {
+    .sidebar {
+        position: fixed;
+        z-index: 1000;
+        width: 250px;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+
+        &.show {
+            transform: translateX(0);
+        }
+    }
+
+    .main-content {
+        margin-left: 0 !important;
+    }
+}

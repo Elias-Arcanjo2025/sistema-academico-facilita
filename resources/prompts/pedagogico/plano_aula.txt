@@ -1,0 +1,43 @@
+Gera um plano de aula para o sistema educativo angolano.
+
+LINGUAGEM (obrigatório): português de Angola ou de Portugal; vocabulário académico cuidado e rigoroso; ortografia luso-angolana (acção, actividade, objectivo, directo, Baptista, etc.); nunca português do Brasil nem grafias como ação/atividade/objetivo.
+
+Contexto:
+- Classe/Turma: {{classe}}
+- Disciplina: {{disciplina}}
+- Trimestre: {{trimestre}}
+- Tema da quinzena/período: {{tema}}
+- Temas do período (TODOS devem ser abordados): {{temas_periodo}}
+- Número de temas no período: {{num_temas_periodo}}
+- Tema do dia (se aplicável): {{tema_dia}}
+- Objectivos gerais: {{objetivos_geral}}
+- Objectivos específicos: {{objetivos_especificos}}
+- Data da aula: {{data_aula}}
+- Duração: {{tempos}} tempo(s) de aula = {{duracao_minutos}} minutos (1 tempo = {{minutos_por_bloco}} min)
+
+REGRAS DE VOLUME (OBRIGATÓRIO — proporcional aos {{tempos}} tempo(s)):
+- "conteudo_ditar": mínimo {{palavras_ditar}} palavras, em ~{{paragrafos_ditar}} parágrafos substanciais.
+- Divide o conteúdo em {{blocos_aula}} bloco(s) sequenciais (um bloco ≈ 1 tempo / {{minutos_por_bloco}} min cada), com transições claras.
+- Se há vários temas no período, distribui-os pelos blocos sem omitir nenhum.
+- "conceitos": array com {{conceitos_qtd}} itens. Cada item: {"termo": "nome do conceito", "definicao": "definição clara, correcta e adequada à classe, em 1–3 frases"}
+- "exercicios_sala": array com {{exercicios_qtd}} itens. Cada item: {"tipo": "pergunta"|"exercicio"|"caso_pratico", "enunciado": "...", "resolucao_orientadora": "..."}
+- "tarefa_casa": array com {{tarefas_qtd}} tarefas (strings)
+- Aulas mais longas (mais tempos) exigem MAIS profundidade, exemplos e prática — não repetas o mesmo volume de uma aula de 1 tempo.
+
+Responde APENAS em JSON válido com estas chaves obrigatórias:
+
+1. "tema" — título da aula (string)
+
+2. "conceitos" — array com {{conceitos_qtd}} itens. Cada item: {"termo": "nome do conceito", "definicao": "definição clara, correcta e adequada à classe, em 1–3 frases"}
+
+3. "conteudo_ditar" — texto corrido para ditar na sala (cumprir volume mínimo acima; pode referenciar os conceitos definidos)
+
+4. "exercicios_sala" — array com {{exercicios_qtd}} itens. Cada item: {"tipo": "pergunta"|"exercicio"|"caso_pratico", "enunciado": "...", "resolucao_orientadora": "..."}
+
+5. "tarefa_casa" — array com {{tarefas_qtd}} tarefas (strings)
+
+Campos opcionais (breves): "objetivos" (array, máx. 3), "conclusao" (string curta).
+
+Não incluas campos vazios. Prioriza qualidade pedagógica e linguagem adequada à classe.
+
+IMPORTANTE: responde só com um objecto JSON válido (sem markdown, sem texto antes ou depois). Em "conteudo_ditar" e definições, usa \\n para parágrafos dentro da string JSON.

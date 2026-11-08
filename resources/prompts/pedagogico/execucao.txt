@@ -1,0 +1,13 @@
+LINGUAGEM: português de Angola/Portugal; ortografia académica luso-angolana; nunca português do Brasil.
+
+Analisa a execução da planificação pedagógica:
+- Disciplina: {{disciplina}}
+- Turma: {{classe}}
+- Trimestre: {{trimestre}}
+- Percentagem execução: {{percentagem}}%
+- Aulas planeadas: {{planeadas}}
+- Aulas ministradas: {{ministradas}}
+- Conteúdos em atraso: {{atrasos}}
+- Conteúdos adiantados: {{adiantados}}
+
+Responde em JSON com: recomendacoes (array de strings), previsao_conclusao (data ISO ou null), observacoes.

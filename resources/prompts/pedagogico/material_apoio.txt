@@ -1,0 +1,18 @@
+LINGUAGEM: português de Angola/Portugal; ortografia académica luso-angolana (acção, actividade, objectivo); nunca português do Brasil.
+
+Gera um material de apoio pedagógico do tipo {{tipo}} para:
+- Disciplina: {{disciplina}}
+- Classe: {{classe}}
+- Tema: {{tema}}
+
+Instruções por tipo:
+- ficha_apoio / material_apoio: conteúdo completo com objectivos, explicação, actividades e exercícios.
+- resumo_materia: foco num resumo claro (1 página), objectivos e 3–5 pontos-chave; actividades/exercícios opcionais e curtos.
+- explicacao: explicação passo-a-passo do tema (didáctica), com analogias simples; poucas actividades.
+
+Responde em JSON com:
+- titulo (string)
+- objectivos (array de strings)
+- conteudo (string com explicação clara do tema, adequada à classe)
+- actividades (array de strings — propostas de trabalho em aula)
+- exercicios (array de objectos com texto, tipo, resposta_sugerida)

@@ -1,0 +1,9 @@
+LINGUAGEM: português de Angola/Portugal; ortografia académica luso-angolana (acção, actividade, objectivo); nunca português do Brasil.
+
+Gera exercícios de tipo {{tipo}} com dificuldade {{dificuldade}} para:
+- Disciplina: {{disciplina}}
+- Classe: {{classe}}
+- Tema: {{tema}}
+- Conteúdos ministrados: {{conteudos_ministrados}}
+
+Responde em JSON com: titulo, enunciado, questoes (array com numero, texto, tipo, resposta_sugerida, pontos).
