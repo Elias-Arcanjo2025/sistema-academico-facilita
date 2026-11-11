@@ -79,10 +79,13 @@ body { color: #1a1a1a; }
 
 .header-logo {
     text-align: center;
-    margin-bottom: 2px;
+    margin-bottom: 3px;
 }
 .header-logo img {
-    height: 38px;
+    height: 50px;
+    max-width: 160px;
+    display: block;
+    margin: 0 auto;
 }
 
 .header-institucional {
@@ -91,7 +94,7 @@ body { color: #1a1a1a; }
 }
 .republica       { font-size: 9px; letter-spacing: 0.5px; }
 .ministerio      { font-size: 10px; font-weight: bold; text-transform: uppercase; }
-.instituicao-nome{ font-size: 9.5px; font-weight: bold; }
+.instituicao-nome{ font-size: 11px; font-weight: bold; text-transform: uppercase; }
 
 .titulo-box {
     text-align: center;
@@ -215,9 +218,9 @@ body { color: #1a1a1a; }
 @endif
 
 <div class="header-institucional">
+    <div class="instituicao-nome">{{ $instituicao['nome'] ?? 'Instituição de Ensino' }}</div>
     <div class="republica">República de Angola</div>
     <div class="ministerio">Ministério da Educação</div>
-    <div class="instituicao-nome">{{ $instituicao['nome'] }}</div>
 </div>
 
 <div class="titulo-box">

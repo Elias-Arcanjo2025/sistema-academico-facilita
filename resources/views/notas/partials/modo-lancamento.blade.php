@@ -9,7 +9,7 @@
 @endphp
 <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
     <div class="btn-group" role="group" aria-label="Modo de lançamento">
-        <a href="{{ route('notas.lancar', $filtrosComuns) }}"
+        <a href="{{ route('notas.lancar', array_merge($filtrosComuns, ['modo' => 'tipo'])) }}"
            class="btn btn-sm {{ $modoActual === 'tipo' ? 'btn-primary' : 'btn-outline-primary' }}">
             <i class="bi bi-list-ol me-1"></i>Por tipo
         </a>

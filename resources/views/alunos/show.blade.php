@@ -192,7 +192,7 @@
                                         @endif
                                     </div>
                                     <form action="{{ route('alunos.repor-palavra-passe', $aluno) }}" method="POST"
-                                          onsubmit="return confirm('Repor palavra-passe para o número de processo? O aluno terá de definir uma nova no próximo acesso.');">
+                                          onsubmit="return confirm('Gerar uma nova palavra-passe temporária para este aluno? Será apresentada uma única vez e o aluno terá de alterá-la no próximo acesso.');">
                                         @csrf
                                         <button type="submit" class="btn btn-outline-warning btn-sm">
                                             <i class="bi bi-arrow-counterclockwise"></i> Repor palavra-passe

@@ -66,11 +66,32 @@ body { color: #111; font-family: DejaVu Sans, sans-serif; }
     padding: 1px 3px;
     vertical-align: middle;
 }
-.meta-top .titulo {
+.institution-header {
+    text-align: center;
+    margin-bottom: 4px;
+}
+.institution-logo {
+    height: 92px;
+    max-width: 160px;
+    width: auto;
+    display: block;
+    margin: 0 auto 2px;
+}
+.institution-name {
     font-size: 11px;
     font-weight: bold;
     text-transform: uppercase;
+}
+.document-title {
+    margin-top: 2px;
+    font-size: 16pt;
+    font-weight: bold;
+    text-transform: uppercase;
     text-align: center;
+}
+.document-subtitle {
+    font-size: 14pt;
+    font-weight: normal;
 }
 .meta-right {
     text-align: right;
@@ -164,19 +185,20 @@ body { color: #111; font-family: DejaVu Sans, sans-serif; }
     <div style="clear:both;"></div>
 </div>
 
+<div class="institution-header">
+    @if(!empty($logoBase64))
+        <img class="institution-logo" src="{{ $logoBase64 }}" alt="Logótipo da instituição">
+    @endif
+    <div class="institution-name">{{ $instituicao['nome'] ?? 'Instituição de Ensino' }}</div>
+    <div class="document-title">
+        Mini-Pauta Anual<br>
+        <span class="document-subtitle">{{ $disciplina->nome }} · Ano Lectivo {{ $ano_lectivo }}</span>
+    </div>
+</div>
+
 <table class="meta-top">
     <tr>
-        <td style="width:28%;">
-            @if(!empty($logoBase64))
-                <img src="{{ $logoBase64 }}" alt="Logo" style="height:28px;">
-            @endif
-            <div style="font-size:7px; margin-top:2px;">{{ $instituicao['nome'] ?? '' }}</div>
-        </td>
-        <td class="titulo" style="width:44%;">
-            Mini-Pauta Anual<br>
-            <span style="font-size:8px; font-weight:normal;">{{ $disciplina->nome }} · Ano Lectivo {{ $ano_lectivo }}</span>
-        </td>
-        <td class="meta-right" style="width:28%;">
+        <td class="meta-right" style="width:100%;">
             <strong>{{ $classeLabel }}</strong><br>
             Turma: {{ $turma->nome }}<br>
             Sala: {{ $salaLabel }} · Período: {{ $periodoLabel }}

@@ -580,11 +580,11 @@ class NotaController extends Controller
 
     /**
      * Vista de lançamento por turma/disciplina.
-     * modo=folha → folha completa (MAC/PP/PT|PG); caso contrário → por tipo (inclui exames).
+     * modo=tipo (ou o filtro legado tipo) → lançamento individual; por padrão → folha completa.
      */
     public function lancar(Request $request): View
     {
-        if ($request->query('modo') === 'folha') {
+        if ($request->query('modo') !== 'tipo' && ! $request->query->has('tipo')) {
             return $this->buildLancamentoLoteView($request);
         }
 

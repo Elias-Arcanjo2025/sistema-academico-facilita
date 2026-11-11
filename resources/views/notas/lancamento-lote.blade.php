@@ -55,7 +55,7 @@
                 :form-action="$urlFolha"
                 :limpar-url="$urlFolha"
                 botao-texto="Carregar alunos"
-                instrucao="Seleccione ano lectivo, turma, disciplina e trimestre para carregar a lista de alunos."
+                instrucao="Seleccione ano lectivo, turma e disciplina. A grelha dos alunos será carregada automaticamente."
                 :resumo="($turmaId && $disciplinaId && ($turmaSeleccionada ?? null))
                     ? '<strong>'.e($turmaSeleccionada->nome).'</strong> · '.e($disciplinas->firstWhere('id', (int) $disciplinaId)?->nome).' · '.e($trimestre).'.º trim. · '.e($anosLectivos[$anoLectivoId] ?? '')
                     : null"
@@ -89,6 +89,7 @@
                         <i class="bi bi-journal-text me-1"></i>Disciplina <span class="text-danger">*</span>
                     </label>
                     <select class="form-select form-select-sm" id="disciplina_id" name="disciplina_id" required
+                            onchange="this.form.submit()"
                             {{ !$turmaId ? 'disabled' : '' }}>
                         <option value="">{{ $turmaId ? '— Seleccione —' : 'Seleccione a turma primeiro' }}</option>
                         @foreach($disciplinas as $disciplina)
@@ -103,6 +104,7 @@
                         <i class="bi bi-calendar-week me-1"></i>Trimestre <span class="text-danger">*</span>
                     </label>
                     <select class="form-select form-select-sm" id="trimestre" name="trimestre" required
+                            onchange="this.form.submit()"
                             title="{{ !auth()->user()->podeIgnorarTrimestreFechado() ? 'Apenas o trimestre actual está disponível para lançamento' : '' }}">
                         @for($t = 1; $t <= 3; $t++)
                             @php
@@ -167,8 +169,8 @@
                             <input type="hidden" name="disciplina_id" value="{{ $disciplinaId }}">
                             <input type="hidden" name="trimestre" value="{{ $trimestre }}">
 
-                            <div class="table-responsive">
-                                <table class="table table-striped table-hover">
+                            <div class="table-responsive nota-lote-responsive">
+                                <table class="table table-striped table-hover nota-lote-table">
                                     <thead class="table-dark">
                                         <tr>
                                             <th style="width: 5%">#</th>
@@ -197,12 +199,12 @@
                                     <tbody>
                                         @foreach($alunos as $aluno)
                                             <tr>
-                                                <td>{{ $aluno->numero_ordem }}</td>
-                                                <td>
+                                                <td class="text-center">{{ $aluno->numero_ordem }}</td>
+                                                <td data-label="Aluno">
                                                     <strong>{{ $aluno->nome }}</strong>
                                                     <input type="hidden" name="notas[{{ $loop->index }}][aluno_id]" value="{{ $aluno->id }}">
                                                 </td>
-                                                <td>
+                                                <td data-label="MAC">
                                                     <input type="number"
                                                            class="form-control form-control-sm"
                                                            name="notas[{{ $loop->index }}][mac]"
@@ -213,7 +215,7 @@
                                                            placeholder="0-20"
                                                            {{ ((isset($trimestreFechado) && $trimestreFechado) || ($modoConsulta ?? false)) ? 'disabled' : '' }}>
                                                 </td>
-                                                <td>
+                                                <td data-label="PP">
                                                     <input type="number"
                                                            class="form-control form-control-sm"
                                                            name="notas[{{ $loop->index }}][pp]"
@@ -225,7 +227,7 @@
                                                            {{ ((isset($trimestreFechado) && $trimestreFechado) || ($modoConsulta ?? false)) ? 'disabled' : '' }}>
                                                 </td>
                                                 @if((int) $trimestre !== 3)
-                                                <td>
+                                                <td data-label="PT">
                                                     <input type="number"
                                                            class="form-control form-control-sm"
                                                            name="notas[{{ $loop->index }}][pt]"
@@ -237,7 +239,7 @@
                                                            {{ ((isset($trimestreFechado) && $trimestreFechado) || ($modoConsulta ?? false)) ? 'disabled' : '' }}>
                                                 </td>
                                                 @else
-                                                <td>
+                                                <td data-label="PG">
                                                     <input type="number"
                                                            class="form-control form-control-sm"
                                                            name="notas[{{ $loop->index }}][pg]"
@@ -271,13 +273,14 @@
 
                             <hr>
 
-                            <div class="d-flex justify-content-end gap-2">
+                            <div class="d-flex justify-content-end gap-2 sticky-bottom bg-body border-top py-3 mt-3"
+                                 style="z-index: 10;">
                                 <a href="{{ route('notas.index') }}" class="btn btn-outline-secondary">
                                     <i class="bi bi-x-lg"></i> Cancelar
                                 </a>
                                 <button type="submit" class="btn btn-success btn-lg"
                                         {{ ((isset($trimestreFechado) && $trimestreFechado) || ($modoConsulta ?? false)) ? 'disabled' : '' }}>
-                                    <i class="bi bi-check-lg"></i> Lançar Todas as Notas
+                                    <i class="bi bi-check-lg"></i> Guardar notas
                                 </button>
                             </div>
                         </form>
@@ -330,5 +333,72 @@
             }
         });
     </script>
+    @endpush
+
+    @push('styles')
+    <style>
+        @media (max-width: 767.98px) {
+            .nota-lote-table,
+            .nota-lote-table tbody {
+                display: block;
+                width: 100%;
+            }
+
+            .nota-lote-responsive {
+                overflow-x: visible;
+            }
+
+            .nota-lote-table thead {
+                display: none;
+            }
+
+            .nota-lote-table tbody tr {
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: .25rem;
+                margin-bottom: .75rem;
+                padding: .5rem;
+                border: 1px solid var(--bs-border-color);
+                border-radius: .75rem;
+                background: var(--bs-body-bg);
+            }
+
+            .nota-lote-table tbody td {
+                display: block;
+                min-width: 0;
+                padding: .4rem;
+                border: 0;
+                background: transparent;
+            }
+
+            .nota-lote-table tbody td:first-child {
+                grid-column: span 1;
+                align-self: center;
+                text-align: center;
+                color: var(--bs-secondary-color);
+            }
+
+            .nota-lote-table tbody td:nth-child(2) {
+                grid-column: span 2;
+                display: flex;
+                align-items: center;
+                overflow-wrap: anywhere;
+            }
+
+            .nota-lote-table tbody td[data-label]::before {
+                display: block;
+                margin-bottom: .25rem;
+                color: var(--bs-secondary-color);
+                font-size: .75rem;
+                font-weight: 600;
+                content: attr(data-label);
+            }
+
+            .nota-lote-table .form-control {
+                min-width: 0;
+            }
+
+        }
+    </style>
     @endpush
 </x-app-layout>

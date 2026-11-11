@@ -87,6 +87,7 @@
                     ? e($turma->nome).' · '.e($disciplina->nome).' · '.e($trimestre).'.º trim. · '.e($tipos[$tipo] ?? $tipo)
                     : null"
             >
+                <input type="hidden" name="modo" value="tipo">
                 <div class="col-sm-6 col-lg-3">
                     <x-ano-lectivo-selector
                         :anoLectivoId="$anoLectivoId"

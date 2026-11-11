@@ -13,7 +13,7 @@
 
     <div class="alert alert-info py-2 px-3 small mb-3" role="note">
         <i class="bi bi-info-circle me-1"></i>
-        <strong>Alunos:</strong> use o <strong>número de processo</strong> como utilizador e palavra-passe (na primeira vez deverá alterá-la).
+        <strong>Alunos:</strong> use o <strong>número de processo</strong> como utilizador e a palavra-passe temporária fornecida pela escola. No primeiro acesso, deverá definir uma nova palavra-passe.
     </div>
 
     <form method="POST" action="{{ route('login') }}">
