@@ -369,6 +369,10 @@ class ExportController extends Controller
         $trimestre = $dados['trimestre'];
         $filename = "mini_pauta_{$turma}_{$disciplina}_T{$trimestre}.pdf";
 
+        if ($request->boolean('visualizar')) {
+            return $pdf->stream($filename);
+        }
+
         return $pdf->download($filename);
     }
 

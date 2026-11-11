@@ -46,8 +46,11 @@
                         <a href="{{ route('export.mini-pauta.excel', ['turma_id' => $turma->id, 'disciplina_id' => $disciplina->id, 'trimestre' => $trimestre, 'ano_lectivo' => $anoLectivo]) }}" class="btn btn-sm btn-success">
                             <i class="bi bi-file-excel"></i> Excel
                         </a>
-                        <a href="{{ route('export.mini-pauta.pdf', ['turma_id' => $turma->id, 'disciplina_id' => $disciplina->id, 'trimestre' => $trimestre, 'ano_lectivo' => $anoLectivo]) }}" class="btn btn-sm btn-danger" target="_blank">
-                            <i class="bi bi-file-pdf"></i> PDF
+                        <a href="{{ route('export.mini-pauta.pdf', ['turma_id' => $turma->id, 'disciplina_id' => $disciplina->id, 'trimestre' => $trimestre, 'ano_lectivo' => $anoLectivo]) }}" class="btn btn-sm btn-danger">
+                            <i class="bi bi-download"></i> Guardar PDF
+                        </a>
+                        <a href="{{ route('export.mini-pauta.pdf', ['turma_id' => $turma->id, 'disciplina_id' => $disciplina->id, 'trimestre' => $trimestre, 'ano_lectivo' => $anoLectivo, 'visualizar' => 1]) }}" class="btn btn-sm btn-outline-danger" target="_blank" rel="noopener">
+                            <i class="bi bi-eye"></i> Visualizar PDF
                         </a>
                         <a href="{{ route('export.mini-pauta-anual.pdf', ['turma_id' => $turma->id, 'disciplina_id' => $disciplina->id, 'ano_lectivo' => $anoLectivo]) }}" class="btn btn-sm btn-outline-danger" target="_blank" title="PDF com os 3 trimestres">
                             <i class="bi bi-file-earmark-pdf"></i> Anual
