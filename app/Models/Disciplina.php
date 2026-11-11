@@ -99,6 +99,16 @@ class Disciplina extends Model
         return $this->hasMany(Nota::class);
     }
 
+    public function presencasDiarias(): HasMany
+    {
+        return $this->hasMany(AlunoPresenca::class);
+    }
+
+    public function avaliacoesDiarias(): HasMany
+    {
+        return $this->hasMany(AlunoAvaliacaoDiaria::class);
+    }
+
     public function professores(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'professor_disciplina_turma', 'disciplina_id', 'user_id')

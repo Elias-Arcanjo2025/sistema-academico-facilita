@@ -267,6 +267,16 @@ class User extends Authenticatable
         return $this->hasMany(Nota::class, 'professor_id');
     }
 
+    public function presencasDiarias(): HasMany
+    {
+        return $this->hasMany(AlunoPresenca::class, 'professor_id');
+    }
+
+    public function avaliacoesDiarias(): HasMany
+    {
+        return $this->hasMany(AlunoAvaliacaoDiaria::class, 'professor_id');
+    }
+
     /**
      * Turmas onde o utilizador lecciona (via pivot professor_disciplina_turma).
      *

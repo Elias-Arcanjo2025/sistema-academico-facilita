@@ -507,6 +507,12 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
 
         Route::resource('notas', NotaController::class);
 
+        // Avaliação diária e presenças dos alunos por disciplina/data
+        Route::prefix('avaliacao-diaria')->name('avaliacao-diaria.')->middleware('can:presencas.lancar')->group(function () {
+            Route::get('/', [\App\Http\Controllers\AvaliacaoDiariaController::class, 'index'])->name('index');
+            Route::post('/', [\App\Http\Controllers\AvaliacaoDiariaController::class, 'store'])->name('store');
+        });
+
         // Mini-Pautas (Professores)
         Route::prefix('mini-pautas')->name('mini-pautas.')->middleware('can:mini-pautas.ver')->group(function () {
             Route::get('/', [\App\Http\Controllers\MiniPautaController::class, 'index'])->name('index');

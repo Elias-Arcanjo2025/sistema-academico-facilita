@@ -116,6 +116,16 @@ class Turma extends Model
         return $this->hasMany(PresencaAula::class);
     }
 
+    public function presencasDiarias(): HasMany
+    {
+        return $this->hasMany(AlunoPresenca::class);
+    }
+
+    public function avaliacoesDiarias(): HasMany
+    {
+        return $this->hasMany(AlunoAvaliacaoDiaria::class);
+    }
+
     public function ocorrencias(): HasMany
     {
         return $this->hasMany(Ocorrencia::class);

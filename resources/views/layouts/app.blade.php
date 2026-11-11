@@ -140,9 +140,13 @@
                 {{-- ====================================== --}}
                 {{-- AVALIAÇÃO (com submenus) --}}
                 {{-- ====================================== --}}
-                @canany(['notas.ver', 'notas.lancar', 'mini-pautas.ver', 'pautas.ver', 'conselhos.ver', 'notas.supervisionar'])
+                @canany(['notas.ver', 'notas.lancar', 'mini-pautas.ver', 'pautas.ver', 'conselhos.ver', 'notas.supervisionar', 'presencas.lancar'])
                 @php
-                    $avaliacaoActive = request()->routeIs('notas.*') || request()->routeIs('mini-pautas.*') || request()->routeIs('pautas.*') || request()->routeIs('conselhos.*');
+                    $avaliacaoActive = request()->routeIs('notas.*')
+                        || request()->routeIs('mini-pautas.*')
+                        || request()->routeIs('pautas.*')
+                        || request()->routeIs('conselhos.*')
+                        || request()->routeIs('avaliacao-diaria.*');
                 @endphp
 
                 <div class="menu-section">
@@ -160,6 +164,14 @@
                         <i class="bi bi-chevron-right dropdown-icon"></i>
                     </div>
                     <div class="collapse submenu {{ $avaliacaoActive ? 'show' : '' }}" id="menuAvaliacao">
+                        @can('presencas.lancar')
+                        <a href="{{ route('avaliacao-diaria.index') }}"
+                           class="menu-item submenu-item {{ request()->routeIs('avaliacao-diaria.*') ? 'active' : '' }}">
+                            <i class="bi bi-person-check"></i>
+                            <span>Presenças e avaliações</span>
+                        </a>
+                        @endcan
+
                         @can('notas.lancar')
                         <a href="{{ $hasAnoLectivo ? route('notas.lancar') : $criarAnoLectivoUrl }}"
                            class="menu-item submenu-item {{ request()->routeIs('notas.lancar') || request()->routeIs('notas.lancamento-lote*') ? 'active' : '' }} {{ !$hasAnoLectivo ? 'disabled' : '' }}"
